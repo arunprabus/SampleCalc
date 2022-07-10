@@ -12,25 +12,10 @@ jobs:
 #    runs-on: self-hosted
     runs-on: ubuntu-latest
 
-
     steps:
+    
     - name: Code Checkout
       uses: actions/checkout@v2
 
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-
-    - name: Run JUnit Test
-      run: mvn clean test
-
-    - name: Run Integration Test
-      run: mvn clean integration-test
-      
-    - name: Run Performance Test with JMeter
-      run: mvn clean verify
-
-    - name: Build Project Site
-      run: mvn site 
-    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
